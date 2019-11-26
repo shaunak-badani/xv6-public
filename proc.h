@@ -8,6 +8,7 @@ struct cpu {
   int ncli;                    // Depth of pushcli nesting.
   int intena;                  // Were interrupts enabled before pushcli?
   struct proc *proc;           // The process running on this cpu or null
+  int useless;                 // debugging
 };
 
 extern struct cpu cpus[NCPU];
@@ -49,6 +50,15 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
+  int ctime;                   // Process creation time
+  int etime;                   // Process end time
+  int rtime;                   // Process running time
+  int priority;                // Process priority
+  int num_run;                 // Number of times the process has been executed
+  int ticks[5];                // Number of ticks proc has received at each of the five priority queues
+  int allowed_time;            // Allowed time for the process in the queue
+  int current_queue;           // The current queue
+  int sched_time;              // Sched time
 };
 
 // Process memory is laid out contiguously, low addresses first:
@@ -56,3 +66,4 @@ struct proc {
 //   original data and bss
 //   fixed-size stack
 //   expandable heap
+

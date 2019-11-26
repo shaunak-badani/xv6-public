@@ -118,8 +118,16 @@ void            setproc(struct proc*);
 void            sleep(void*, struct spinlock*);
 void            userinit(void);
 int             wait(void);
+int             waitx(int* wtime, int* rtime);
 void            wakeup(void*);
 void            yield(void);
+void            update_proc_time(int ticks_passed);
+void            update_sched_time();
+void            list_processes();
+int             set_priority(int pid, int pr);
+void            check_queues();
+void            getprocessinfo(int pid);
+
 
 // swtch.S
 void            swtch(struct context**, struct context*);

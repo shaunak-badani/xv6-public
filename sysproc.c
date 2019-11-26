@@ -89,3 +89,55 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+int
+sys_waitx(void)
+{
+  int *wtime;
+  int *rtime;
+
+  if(argptr(0, (char**)&wtime, sizeof(int)) < 0) {
+    return -1;
+  }
+  if(argptr(1, (char**)&rtime, sizeof(int)) < 0) {
+    return -1;
+  }
+  return waitx(wtime, rtime);
+}
+
+int 
+sys_ps(void) 
+{
+  list_processes();
+  return 1;
+}
+
+int sys_set_priority(void)
+{
+  int pid, pr;
+  if(argint(0, &pid) < 0)
+    return -1;
+  if(argint(1, &pr) < 0)
+    return -1;
+
+  return set_priority(pid, pr);
+}
+
+int sys_check_queue(void)
+{
+  #ifdef MLFQ
+  check_queues();
+  #endif
+  return 1;
+}
+
+int sys_getpinfo(void) {
+  #ifdef MLFQ
+  int pid;
+  if(argint(0, &pid) < 0)
+    return -1;
+  getprocessinfo(pid);
+  return 1;
+  #endif
+  return 0;
+}

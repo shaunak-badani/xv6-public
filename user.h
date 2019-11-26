@@ -23,6 +23,11 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+int waitx(int* wtime, int* rtime);
+int ps(void);
+int set_priority(int process_id, int pr);
+void check_queue();
+int getpinfo(int pid);
 
 // ulib.c
 int stat(const char*, struct stat*);
@@ -37,3 +42,4 @@ void* memset(void*, int, uint);
 void* malloc(uint);
 void free(void*);
 int atoi(const char*);
+
