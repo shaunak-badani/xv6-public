@@ -8,7 +8,8 @@ make clean
 sudo apt-get install qemu
 ```
 
-As per the assignment requirements, three different job schedulers were implemented. To run each of them, follow this table and run appropriate command : 
+As per the assignment requirements, three different job schedulers were implemented. To run each of them, follow this table and run appropriate command :
+ 
 Scheduler  | Command
 ------------- | -------------
 Round Robin (Part of boilerplate) | `make qemu SCHEDULER=RR`
